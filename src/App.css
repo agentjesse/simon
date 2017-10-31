@@ -18,6 +18,7 @@
   height: 4rem;
   margin: 0.5rem;
   font-size: 2rem;
+  color: rgba(0, 0, 0, 0.055);
 }
 .gameBtn:active{
   border-style: inset;

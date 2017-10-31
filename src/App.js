@@ -5,14 +5,13 @@ import soundImport2 from './simonSound2.mp3';
 import soundImport3 from './simonSound3.mp3';
 import soundImport4 from './simonSound4.mp3';
 
-
 class App extends Component {
   //constructor function
   constructor(props) {
     //make a call to super
     super(props);
     //local variables
-    // this.movesArray = [];
+    this.running = false;
     //set the state
     this.state = {
       sound1: new Audio(soundImport1),
@@ -21,9 +20,32 @@ class App extends Component {
       sound4: new Audio(soundImport4),
       intervalId:undefined
     };
+    // this.listenUp(); //keypress implementation for future
   }
 
+  //keypress implementation for future
+  // listenUp() {
+  //   //handle key presses
+  //   document.addEventListener("keydown", (evt)=>{
+  //     if (evt.key === 'q'){
+  //       this.state.sound1.play();
+  //     }
+  //     else if (evt.key === 'o'){
+  //       this.state.sound2.play();
+  //     }
+  //     else if (evt.key === 's'){
+  //       this.state.sound3.play();
+  //     }
+  //     else if (evt.key === 'k'){
+  //       this.state.sound4.play();
+  //     }
+  //   });
+  // }
+
+  
+
   playSequence(){
+    this.running = true;
     // generate array of random moves
     let movesArr = [];
     for( var moves = 0 ; moves<5 ; moves++ ){
@@ -47,6 +69,7 @@ class App extends Component {
         setTimeout(()=>{ document.querySelector('.light2').className='gameBtn Btn2' }, 900);
       }
       else if( movesArr[count] === 2 ){ 
+        this.state.sound3.fastSeek(0.1);
         this.state.sound3.play();
         document.querySelector('.Btn3').className='gameBtn light3';
         setTimeout(()=>{ document.querySelector('.light3').className='gameBtn Btn3' }, 900);
@@ -76,28 +99,41 @@ class App extends Component {
         {/* play buttons */}
         <div className='row'>
           <button className='gameBtn Btn1'
-            onClick={()=>{ 
+            onMouseDown={()=>{ 
+              this.state.sound1.fastSeek(0);
+              this.state.sound1.play();
             }}
           >Q</button>
           <button className='gameBtn Btn2'
-            onClick={()=>{ 
+            onMouseDown={()=>{ 
+              this.state.sound2.fastSeek(0);
+              this.state.sound2.play();
             }}
           >O</button>
         </div>
         <div className='row'>
           <button className='gameBtn Btn3'
-            onClick={()=>{ 
+            onMouseDown={()=>{ 
+              this.state.sound3.fastSeek(0.1);
+              this.state.sound3.play();
             }}
           >S</button>
           <button className='gameBtn Btn4'
-            onClick={()=>{ 
+            onMouseDown={()=>{ 
+              this.state.sound4.fastSeek(0.1);
+              this.state.sound4.play();
             }}
           >K</button>
         </div>
         {/* machine buttons */}
         <div className='row'>
           <button className='machineBtn'
-            onClick={ ()=>{ this.playSequence() } }
+            onClick={()=>{ 
+              if (this.running){
+                clearInterval(this.state.intervalId);
+              }
+              this.playSequence(); 
+              }}
           >re/start</button>
         </div>
 
