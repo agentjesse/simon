@@ -9,6 +9,7 @@
   display: flex;
   width: 100%;
   justify-content: center;
+  align-items: center;
 }
 
 .gameBtn{
@@ -61,10 +62,11 @@
 }
 
 .machineBtn{
+  background-color: rgb(145, 255, 255);
   border: 3px outset rgba(66, 66, 66, 0.568);
   border-radius: 1rem;
-  width: 6rem;
-  height: 6rem;
+  width: 5.5rem;
+  height: 5rem;
   margin: 0.5rem;
   font-size: 1.5rem;
   padding: 0;
@@ -72,5 +74,34 @@
 }
 .machineBtn:active{
   border-style: inset;
-  background-color: gray;
+  background-color: rgb(104, 183, 187);
+}
+
+.strict{
+  font-size: 1.3rem;
+  background-color: rgb(126, 0, 0);
+  height: 3.7rem;
+  width: 4.5rem;
+  line-height: 1;
+  color: rgb(219, 218, 218);
+}
+.strict:active{
+  background-color: rgb(104, 0, 0);
+}
+.strictLight{
+  background-color: rgb(255, 0, 0);
+}
+
+.counter{
+  background-color: rgb(0, 0, 0);
+  color: rgb(0, 248, 248);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 3px solid rgb(0, 177, 177);
+  border-radius: 30%;
+  width: 4.5rem;
+  margin: 0.5rem;
+  height: 4.7rem;
+  font-size: 1.6rem;
 }

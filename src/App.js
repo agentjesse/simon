@@ -11,10 +11,15 @@ class App extends Component {
     //make a call to super
     super(props);
     //local variables
+    this.btnLock = true; // block before starting game
     this.running = false;//controls if inputs will be accepted during playing of pattern
+    this.strict = false; //control strict mode
     this.playerMoves = []; //moves input from player
     this.movesArr = []; //moves chosen by pc
     this.playerIsAt = 0; //index of how much of the pattern the player has successfully repeated
+    this.specificLoc = 0;
+    this.hitCount = 0; //checking by button
+    this.lastMoves = [];
     this.intervalId = undefined; //store id here....in react state it triggers the interval function twice after win
 
     //set the state
@@ -54,18 +59,20 @@ class App extends Component {
       //check for win
       if( currentStep+1 === this.movesArr.length ){
         alert('You Win!');
-        // debugger
-        this.won = true;
         this.freshStart();
       }
     }
     else{
-      alert('listen and try again');
-      // console.log('incorrect choice');
-      //reset inputs
-      this.playerMoves = [];
-      //play moves again
-      this.playMoves();
+      if(this.strict){
+        alert('mismatch, new pattern starting...');
+        this.freshStart();
+      } else{
+        alert('listen and try again');
+        //reset inputs
+        this.playerMoves = [];
+        this.playMoves();
+      }
+      
     }
   }
 
@@ -79,10 +86,32 @@ class App extends Component {
       this.state['sound' + num].fastSeek(0);
       this.state['sound' + num].play();
     }
-    // debugger
+
+    //machine not initialized yet? block
+    if( this.btnLock )
+      return
+
     //push move into component array
     this.playerMoves.push(num);
     console.log(this.playerMoves);
+
+
+    // if( this.lastMoves.toString() === this.movesArr.slice(0,this.specificLoc + 1).toString() ){
+    //   console.log('good');
+    //   this.specificLoc++;
+    // } else{
+    //   console.log('bad');
+    // }
+
+    
+
+    //check current input against matching element in moves array
+    // console.log( this.doesSingleMatch(num) );
+    // if( this.playerMoves.toString() === this.movesArr.slice(0,this.playerIsAt + 1).toString() ){
+    //   console.log('good');
+    // }
+
+
     // check state if reached input
     if( this.playerMoves.length === this.playerIsAt+1 ){
       this.doesPatternMatch();
@@ -90,9 +119,18 @@ class App extends Component {
     
   }
 
+  doesSingleMatch(num){
+    let patternElem = this.movesArr[this.playerIsAt];
+    if ( num === patternElem ){
+      return true;
+    } else{
+      return false;
+    }
+  }
+
   makeSequence(){
-    // generate array of 20 random moves, 4 for development
-    for( var moves = 0 ; moves<7 ; moves++ )
+    // generate array of 20 random moves, 5 for development
+    for( var moves = 0 ; moves<5 ; moves++ )
       this.movesArr.push( Math.floor(Math.random() * 4) );
     console.log(this.movesArr);
     //play the moves to the player
@@ -101,12 +139,12 @@ class App extends Component {
   }
 
   playMoves(){
+    //re render for counter
+    this.forceUpdate();
     //set control variable
-    // debugger
     this.running = true;
     let count = 0;
     let intervalId = setInterval( ()=> { 
-      // debugger
       //play sound according to element value
       if     ( this.movesArr[count] === 0 ){ 
         this.state.sound0.play();
@@ -171,8 +209,24 @@ class App extends Component {
         {/* machine buttons */}
         <div className='row'>
           <button className='machineBtn'
-            onClick={()=>{ this.freshStart() }}
-          >re/start</button>
+            onClick={()=>{
+              this.btnLock = false;
+              this.freshStart();
+            }}
+          >START<br/>restart</button>
+          <button className='machineBtn strict'
+            onClick={()=>{ 
+              this.strict = !this.strict;
+              this.btnLock = false;
+              this.freshStart();
+              if(this.strict){
+                document.querySelector('.strict').className='machineBtn strict strictLight';
+              } else{
+                document.querySelector('.strict').className='machineBtn strict';
+              }
+            }}
+          >strict<br/>mode</button>
+          <span className='counter'>steps<br/>{this.playerIsAt+1}</span>
         </div>
 
       </div>
