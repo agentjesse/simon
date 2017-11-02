@@ -14,14 +14,14 @@
 .gameBtn{
   border: 3px outset rgba(66, 66, 66, 0.568);
   border-radius: 1rem;
-  width: 4rem;
-  height: 4rem;
+  width: 8rem;
+  height: 8rem;
   margin: 0.5rem;
   font-size: 2rem;
-  color: rgba(0, 0, 0, 0.055);
 }
 .gameBtn:active{
   border-style: inset;
+  border-color: rgba(0, 0, 0, 0.151);
 }
 .Btn1{
   background-color: rgb(0, 160, 0);
@@ -33,16 +33,16 @@
   background-color: rgb(0, 255, 0); 
 }
 .Btn2{
-  background-color: rgb(196, 0, 0);
+  background-color: rgb(133, 0, 0);
 }
 .Btn2:active{
-  background-color: rgb(255, 71, 71);
+  background-color: rgb(255, 0, 0);
 }
 .light2{
-  background-color: rgb(255, 71, 71);
+  background-color: rgb(255, 0, 0);
 }
 .Btn3{
-  background-color: rgb(184, 156, 1);
+  background-color: rgb(168, 140, 0);
 }
 .Btn3:active{
   background-color: rgb(255, 230, 0);
@@ -51,22 +51,22 @@
   background-color: rgb(255, 230, 0);
 }
 .Btn4{
-  background-color: rgb(0, 0, 212);
+  background-color: rgb(1, 1, 189);
 }
 .Btn4:active{
-  background-color: rgb(0, 102, 255);
+  background-color: rgb(0, 153, 255);
 }
 .light4{
-  background-color: rgb(0, 102, 255);
+  background-color: rgb(0, 153, 255);
 }
 
 .machineBtn{
   border: 3px outset rgba(66, 66, 66, 0.568);
   border-radius: 1rem;
-  width: 4rem;
-  height: 4rem;
+  width: 6rem;
+  height: 6rem;
   margin: 0.5rem;
-  font-size: 1rem;
+  font-size: 1.5rem;
   padding: 0;
   text-align: center;
 }
