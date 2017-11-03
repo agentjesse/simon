@@ -41,6 +41,7 @@ class App extends Component {
 
   //check if inputs pass
   doesPatternMatch(){ 
+    // debugger //adding this debugger allows time for the promise to fulfill. figure out how to replicate this wait period, maybe try throttling call to here.
     //check if current player moves match up with provided
     if( this.playerMoves.toString() === this.movesArr.slice(0,this.playerMoves.length).toString() ){
       console.log('choices so far match given moves');
@@ -90,8 +91,8 @@ class App extends Component {
     //push move into component array
     this.playerMoves.push(num);
     console.log(this.playerMoves);
-    //call checking function
-    this.doesPatternMatch();
+    //call checking function, throttle calling it right away to let promise from asynchronous play() resolve.
+    setTimeout(()=>{ this.doesPatternMatch() },200);
   }
 
   makeSequence(){
@@ -110,6 +111,7 @@ class App extends Component {
     this.running = true;
     let count = 0;
     let intervalId = setInterval( ()=> { 
+      // debugger
       //play sound according to element value
       if     ( this.movesArr[count] === 0 ){ 
         this.state.sound0.play();
