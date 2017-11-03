@@ -19,14 +19,14 @@ class App extends Component {
     this.movesArr = []; //moves chosen by pc
     this.playerIsAt = 0; //index of how much of the pattern the player has successfully repeated
     this.intervalId = undefined; //store id here....in react state it triggers the interval function twice after win
-
+    //sounds
+    this.sound0 = new Audio(soundImport1);
+    this.sound1 = new Audio(soundImport2);
+    this.sound2 = new Audio(soundImport3);
+    this.sound3 = new Audio(soundImport4);
     //set the state
-    this.state = {
-      sound0: new Audio(soundImport1),
-      sound1: new Audio(soundImport2),
-      sound2: new Audio(soundImport3),
-      sound3: new Audio(soundImport4)
-    };
+    // this.state = {
+    // };
   }
   //resetting function for all game arrays, then firing of new sequence
   freshStart(){
@@ -40,8 +40,7 @@ class App extends Component {
   }
 
   //check if inputs pass
-  doesPatternMatch(){ 
-    // debugger //adding this debugger allows time for the promise to fulfill. figure out how to replicate this wait period, maybe try throttling call to here.
+  doesPatternMatch(){
     //check if current player moves match up with provided
     if( this.playerMoves.toString() === this.movesArr.slice(0,this.playerMoves.length).toString() ){
       console.log('choices so far match given moves');
@@ -77,13 +76,14 @@ class App extends Component {
 
   //put choice into array
   pushMove(num){
-    //play sound, fix lag
-    if( num === 2 || num === 3){
-      // this.state['sound' + num].fastSeek(0.1);
-      this.state['sound' + num].play();
+    //play sound from button press
+    if(num === 3 || num === 2){
+      // if sound is playing seek to start position then play, this also bypasses laggy start of the provided soundwave
+      this['sound' + num].currentTime = 0.15;
+      this['sound' + num].play();
     } else{
-      // this.state['sound' + num].fastSeek(0);
-      this.state['sound' + num].play();
+      this['sound' + num].currentTime = 0;
+      this['sound' + num].play();
     }
     //machine not initialized yet? stop
     if( this.btnLock )
@@ -92,7 +92,7 @@ class App extends Component {
     this.playerMoves.push(num);
     console.log(this.playerMoves);
     //call checking function, throttle calling it right away to let promise from asynchronous play() resolve.
-    setTimeout(()=>{ this.doesPatternMatch() },200);
+    setTimeout(()=>{ this.doesPatternMatch() },100);
   }
 
   makeSequence(){
@@ -114,25 +114,25 @@ class App extends Component {
       // debugger
       //play sound according to element value
       if     ( this.movesArr[count] === 0 ){ 
-        this.state.sound0.play();
+        this.sound0.play();
         //add class to change rendered style and remove it before next interval call is fired
         document.querySelector('.Btn1').className='gameBtn light1';
         setTimeout(()=>{ document.querySelector('.light1').className='gameBtn Btn1' }, 900);
       }
       else if( this.movesArr[count] === 1 ){ 
-        this.state.sound1.play();
+        this.sound1.play();
         document.querySelector('.Btn2').className='gameBtn light2';
         setTimeout(()=>{ document.querySelector('.light2').className='gameBtn Btn2' }, 900);
       }
       else if( this.movesArr[count] === 2 ){ 
-        // this.state.sound2.fastSeek(0.1);
-        this.state.sound2.play();
+        this.sound2.currentTime = 0.15;
+        this.sound2.play();
         document.querySelector('.Btn3').className='gameBtn light3';
         setTimeout(()=>{ document.querySelector('.light3').className='gameBtn Btn3' }, 900);
       }
       else{ 
-        // this.state.sound3.fastSeek(0.1);
-        this.state.sound3.play();
+        this.sound3.currentTime = 0.15;
+        this.sound3.play();
         document.querySelector('.Btn4').className='gameBtn light4';
         setTimeout(()=>{ document.querySelector('.light4').className='gameBtn Btn4' }, 900);
       }
