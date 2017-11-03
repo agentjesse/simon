@@ -19,16 +19,14 @@ class App extends Component {
     this.movesArr = []; //moves chosen by pc
     this.playerIsAt = 0; //index of how much of the pattern the player has successfully repeated
     this.intervalId = undefined; //store id here....in react state it triggers the interval function twice after win
-    //sounds
-    this.sound0 = new Audio(soundImport1);
-    this.sound1 = new Audio(soundImport2);
-    this.sound2 = new Audio(soundImport3);
-    this.sound3 = new Audio(soundImport4);
 
     //set the state
-    // this.state = {
-    //   // sound1: new Audio(soundImport2)
-    // };
+    this.state = {
+      sound0: new Audio(soundImport1),
+      sound1: new Audio(soundImport2),
+      sound2: new Audio(soundImport3),
+      sound3: new Audio(soundImport4)
+    };
   }
   //resetting function for all game arrays, then firing of new sequence
   freshStart(){
@@ -80,11 +78,11 @@ class App extends Component {
   pushMove(num){
     //play sound, fix lag
     if( num === 2 || num === 3){
-      this['sound' + num].fastSeek(0.1);
-      this['sound' + num].play();
+      // this.state['sound' + num].fastSeek(0.1);
+      this.state['sound' + num].play();
     } else{
-      this['sound' + num].fastSeek(0);
-      this['sound' + num].play();
+      // this.state['sound' + num].fastSeek(0);
+      this.state['sound' + num].play();
     }
     //machine not initialized yet? stop
     if( this.btnLock )
@@ -114,25 +112,25 @@ class App extends Component {
     let intervalId = setInterval( ()=> { 
       //play sound according to element value
       if     ( this.movesArr[count] === 0 ){ 
-        this.sound0.play();
+        this.state.sound0.play();
         //add class to change rendered style and remove it before next interval call is fired
         document.querySelector('.Btn1').className='gameBtn light1';
         setTimeout(()=>{ document.querySelector('.light1').className='gameBtn Btn1' }, 900);
       }
       else if( this.movesArr[count] === 1 ){ 
-        this.sound1.play();
+        this.state.sound1.play();
         document.querySelector('.Btn2').className='gameBtn light2';
         setTimeout(()=>{ document.querySelector('.light2').className='gameBtn Btn2' }, 900);
       }
       else if( this.movesArr[count] === 2 ){ 
-        this.sound2.fastSeek(0.1);
-        this.sound2.play();
+        // this.state.sound2.fastSeek(0.1);
+        this.state.sound2.play();
         document.querySelector('.Btn3').className='gameBtn light3';
         setTimeout(()=>{ document.querySelector('.light3').className='gameBtn Btn3' }, 900);
       }
       else{ 
-        this.sound3.fastSeek(0.1);
-        this.sound3.play();
+        // this.state.sound3.fastSeek(0.1);
+        this.state.sound3.play();
         document.querySelector('.Btn4').className='gameBtn light4';
         setTimeout(()=>{ document.querySelector('.light4').className='gameBtn Btn4' }, 900);
       }
