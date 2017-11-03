@@ -53,7 +53,6 @@ class App extends Component {
       } 
       //if current player moves are greater than the greatest progression into the pattern, reset moves and play incremented pattern
       else if( this.playerMoves.length > this.playerIsAt ){
-        debugger
         this.playerMoves = [];
         this.playerIsAt++;
         this.playMoves();
@@ -103,7 +102,6 @@ class App extends Component {
       this.movesArr.push( Math.floor(Math.random() * 4) );
     console.log(this.movesArr);
     //play the moves to the player
-    // debugger
     this.playMoves();
   }
 
@@ -157,46 +155,53 @@ class App extends Component {
     return (
       <div className="App">
 
-        {/* play buttons */}
-        <div className='row first'>
-          <button className='gameBtn Btn1'
-            onClick={()=>{ if(!this.running) this.pushMove(0) }}
-          ></button>
-          <button className='gameBtn Btn2'
-            onClick={()=>{ if(!this.running) this.pushMove(1) }}
-          ></button>
-        </div>
         <div className='row'>
-          <button className='gameBtn Btn3'
-            onClick={()=>{ if(!this.running) this.pushMove(2) }}
-          ></button>
-          <button className='gameBtn Btn4'
-            onClick={()=>{ if(!this.running) this.pushMove(3) }}
-          ></button>
+          <div className='holder'>
+            {/* play buttons */}
+            <div className='row first'>
+              <button className='gameBtn Btn1'
+                onClick={()=>{ if(!this.running) this.pushMove(0) }}
+              ></button>
+              <button className='gameBtn Btn2'
+                onClick={()=>{ if(!this.running) this.pushMove(1) }}
+              ></button>
+            </div>
+            <div className='row'>
+              <button className='gameBtn Btn3'
+                onClick={()=>{ if(!this.running) this.pushMove(2) }}
+              ></button>
+              <button className='gameBtn Btn4'
+                onClick={()=>{ if(!this.running) this.pushMove(3) }}
+              ></button>
+            </div>
+
+            {/* machine buttons */}
+            <div className='row'>
+              <button className='machineBtn'
+                onClick={()=>{
+                  this.btnLock = false;
+                  this.freshStart();
+                }}
+              >start<br/>/<br/>restart</button>
+              <button className='machineBtn strict'
+                onClick={()=>{ 
+                  this.strict = !this.strict;
+                  this.btnLock = false;
+                  this.freshStart();
+                  if(this.strict){
+                    document.querySelector('.strict').className='machineBtn strict strictLight';
+                  } else{
+                    document.querySelector('.strict').className='machineBtn strict';
+                  }
+                }}
+              >strict<br/>mode</button>
+              <span className='counter'>steps<br/>{this.playerIsAt+1}</span>
+            </div>
+
+          </div>
         </div>
 
-        {/* machine buttons */}
-        <div className='row'>
-          <button className='machineBtn'
-            onClick={()=>{
-              this.btnLock = false;
-              this.freshStart();
-            }}
-          >START<br/>restart</button>
-          <button className='machineBtn strict'
-            onClick={()=>{ 
-              this.strict = !this.strict;
-              this.btnLock = false;
-              this.freshStart();
-              if(this.strict){
-                document.querySelector('.strict').className='machineBtn strict strictLight';
-              } else{
-                document.querySelector('.strict').className='machineBtn strict';
-              }
-            }}
-          >strict<br/>mode</button>
-          <span className='counter'>steps<br/>{this.playerIsAt+1}</span>
-        </div>
+        
 
       </div>
     );

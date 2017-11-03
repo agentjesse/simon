@@ -1,8 +1,18 @@
+@font-face {
+  font-family: 'Julius Sans One';
+  src: url(./JuliusSansOne-Regular.ttf);
+}
+
+@keyframes lightControl {
+  to {box-shadow:0 0 3rem rgb(0, 0, 0);}
+}
+
 .App {
   text-align: center;
   font-size: 1rem;
   display: flex;
   flex-wrap: wrap;
+  font-family: 'Julius Sans One';
 }
 
 .row{
@@ -11,13 +21,24 @@
   justify-content: center;
   align-items: center;
 }
+
+.holder{
+  margin-top: 1rem;
+  background-color: rgb(19, 26, 0);
+  padding: 0.7rem;
+  border: 2px outset rgb(101, 126, 0);
+  border-radius: 1.7rem;
+  background: url(./greenBkg.jpg) no-repeat center/cover;
+}
+
 .first{
   margin-top: 0.5rem;
 }
 
+
 .gameBtn{
-  border: 3px outset rgba(66, 66, 66, 0.568);
-  border-radius: 1rem;
+  border: 4px outset rgba(90, 82, 82, 0.295);
+  border-radius: 50%;
   width: 8rem;
   height: 8rem;
   margin: 0.5rem;
@@ -28,83 +49,110 @@
   border-color: rgba(0, 0, 0, 0.151);
 }
 .Btn1{
-  background-color: rgb(0, 160, 0);
+  background-color: rgb(54, 92, 0);
 }
 .Btn1:active{
-  background-color: rgb(0, 255, 0);
+  background-color: rgb(153, 255, 0);
+  box-shadow:0 0 3rem rgb(153, 255, 0);
 }
 .light1{
-  background-color: rgb(0, 255, 0); 
+  background-color: rgb(153, 255, 0);
+  box-shadow:0 0 5rem rgb(153, 255, 0);
+  animation-name: lightControl;
+  animation-duration: 1s;
 }
 .Btn2{
-  background-color: rgb(133, 0, 0);
+  background-color: rgb(117, 0, 0);
 }
 .Btn2:active{
   background-color: rgb(255, 0, 0);
+  box-shadow:0 0 3.5rem rgb(255, 58, 58);
 }
 .light2{
   background-color: rgb(255, 0, 0);
+  box-shadow:0 0 5rem rgb(255, 58, 58);
+  animation-name: lightControl;
+  animation-duration: 1s;
 }
 .Btn3{
-  background-color: rgb(168, 140, 0);
+  background-color: rgb(207, 100, 0);
 }
 .Btn3:active{
-  background-color: rgb(255, 230, 0);
+  background-color: rgb(255, 217, 0);
+  box-shadow:0 0 3rem rgb(255, 217, 0);
 }
 .light3{
-  background-color: rgb(255, 230, 0);
+  background-color: rgb(255, 217, 0);
+  box-shadow:0 0 5rem rgb(255, 217, 0);
+  animation-name: lightControl;
+  animation-duration: 1s;
 }
 .Btn4{
-  background-color: rgb(1, 1, 189);
+  background-color: rgb(24, 0, 82);
 }
 .Btn4:active{
-  background-color: rgb(0, 153, 255);
+  background-color: rgb(0, 183, 255);
+  box-shadow:0 0 3rem rgb(0, 183, 255);
 }
 .light4{
-  background-color: rgb(0, 153, 255);
+  background-color: rgb(0, 183, 255);
+  box-shadow:0 0 5rem rgb(0, 183, 255);
+  animation-name: lightControl;
+  animation-duration: 1s;
 }
 
 .machineBtn{
-  background-color: rgb(145, 255, 255);
-  border: 3px outset rgba(66, 66, 66, 0.568);
+  font-family: 'Julius Sans One';
+  background-color: rgb(0, 0, 0);
+  border: 3px outset rgb(157, 255, 0);
+  color: rgb(179, 255, 0);
   border-radius: 1rem;
   width: 5.5rem;
   height: 5rem;
   margin: 0.5rem;
-  font-size: 1.5rem;
+  font-size: 1.2rem;
   padding: 0;
   text-align: center;
+  line-height: 0.9;
 }
 .machineBtn:active{
   border-style: inset;
-  background-color: rgb(104, 183, 187);
+  border-color: rgba(187, 255, 0, 0.568);
+  background-color: rgb(0, 0, 0);
+  color: rgb(94, 153, 0);
 }
 
 .strict{
-  font-size: 1.3rem;
-  background-color: rgb(126, 0, 0);
+  font-size: 1.1rem;
+  background-color: rgb(99, 0, 0);
   height: 3.7rem;
   width: 4.5rem;
   line-height: 1;
-  color: rgb(219, 218, 218);
+  border-width: 2px;
+  border-color: rgb(180, 42, 42);
+  color: rgb(255, 223, 187);
 }
 .strict:active{
+  border-color: rgb(180, 42, 42);
   background-color: rgb(104, 0, 0);
+  color: rgb(185, 159, 131);
 }
 .strictLight{
+  border-color: rgba(255, 71, 71, 0.445);
   background-color: rgb(255, 0, 0);
+  box-shadow:0 0 1rem red;
 }
 
 .counter{
   background-color: rgb(0, 0, 0);
-  color: rgb(0, 248, 248);
+  color: rgb(208, 226, 104);
   display: flex;
   justify-content: center;
   align-items: center;
-  border: 3px solid rgb(0, 177, 177);
+  border: 3px inset #9aec00a8;
   border-radius: 30%;
   width: 4.5rem;
   margin: 0.5rem;
-  height: 4.7rem;
-  font-size: 1.6rem;
+  height: 4.6rem;
+  font-size: 1.4rem;
 }
